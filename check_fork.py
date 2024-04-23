@@ -59,11 +59,15 @@ def compare_repositories(repo1_path, repo2_path):
                     overlap_percentages.append(
                         (file1_path, file2_path, overlap_percentage))
                 except UnicodeDecodeError:
-                    print(f"Could not compare {file1_path} and {
-                          file2_path} due to encoding error")
+                    print(
+                        f"Could not compare {file1_path} and " +
+                        f"{file2_path} due to encoding error",
+                    )
                 except Exception as e:
-                    print(f"Could not compare {file1_path} and {
-                          file2_path} due to error: {e}")
+                    print(
+                        f"Could not compare {file1_path} and " +
+                        f"{file2_path} due to error: {e}",
+                    )
                 break
 
     return overlap_percentages
@@ -76,7 +80,7 @@ def check_fork(repo1_path, repo2_path):
         for file1_path, file2_path, overlap_percentage in overlap_percentages:
             print(
                 f"Files: {file1_path} and {file2_path} - " +
-                "Overlap Percentage: {overlap_percentage}%"
+                f"Overlap Percentage: {overlap_percentage}%"
             )
             file.write(f"{file1_path},{file2_path},{overlap_percentage}\n")
 
