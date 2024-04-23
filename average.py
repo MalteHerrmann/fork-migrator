@@ -1,12 +1,23 @@
-import pandas as pd
+"""
+This file contains logic to calculate the average value of
+the overlap percentage between two repositories from the CSV output
+of this tool.
+"""
+
 import os
+import pandas as pd
 
 
 def calculate_average(path: str):
-    csv_files = [file for file in os.listdir(folder_path) if file.endswith(".csv")]
+    """Calculates the average value of overlap in CSVs in the given directory."""
+
+    if not os.path.isdir(path):
+        raise NotADirectoryError(f"{path} is not a valid directory path")
+
+    csv_files = [file for file in os.listdir(path) if file.endswith(".csv")]
 
     for csv_file in csv_files:
-        file_path = os.path.join(folder_path, csv_file)
+        file_path = os.path.join(path, csv_file)
 
         # Read the CSV file into a pandas DataFrame
         df = pd.read_csv(
