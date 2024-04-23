@@ -10,12 +10,12 @@ import sys
 
 
 def get_file_contents(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         contents = file.readlines()
 
     idx = 0
     for line in contents:
-        if line.strip().startswith('//'):
+        if line.strip().startswith("//"):
             idx += 1
         else:
             break
@@ -43,7 +43,7 @@ def compare_repositories(repo1_path, repo2_path):
         if ".git" in root1 or "client/docs" in root1:
             continue
 
-        relative_root1 = root1[len(repo1_path)+1:]
+        relative_root1 = root1[len(repo1_path) + 1 :]
         for file1 in files1:
             print(f"Checking {file1}")
             file1_path = os.path.join(root1, file1)
@@ -55,18 +55,20 @@ def compare_repositories(repo1_path, repo2_path):
                     content2 = get_file_contents(file2_path)
 
                     overlap_percentage = calculate_overlap_percentage(
-                        content1, content2)
+                        content1, content2
+                    )
                     overlap_percentages.append(
-                        (file1_path, file2_path, overlap_percentage))
+                        (file1_path, file2_path, overlap_percentage)
+                    )
                 except UnicodeDecodeError:
                     print(
-                        f"Could not compare {file1_path} and " +
-                        f"{file2_path} due to encoding error",
+                        f"Could not compare {file1_path} and "
+                        + f"{file2_path} due to encoding error",
                     )
                 except Exception as e:
                     print(
-                        f"Could not compare {file1_path} and " +
-                        f"{file2_path} due to error: {e}",
+                        f"Could not compare {file1_path} and "
+                        + f"{file2_path} due to error: {e}",
                     )
                 break
 
@@ -79,8 +81,8 @@ def check_fork(repo1_path, repo2_path):
     with open("overlap_percentages.csv", "w") as file:
         for file1_path, file2_path, overlap_percentage in overlap_percentages:
             print(
-                f"Files: {file1_path} and {file2_path} - " +
-                f"Overlap Percentage: {overlap_percentage}%"
+                f"Files: {file1_path} and {file2_path} - "
+                + f"Overlap Percentage: {overlap_percentage}%"
             )
             file.write(f"{file1_path},{file2_path},{overlap_percentage}\n")
 

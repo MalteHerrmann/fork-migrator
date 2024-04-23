@@ -3,7 +3,7 @@ from check_fork import compare_repositories
 
 
 def test_compare_same_repositories():
-    repo1_path = 'testdata/evmos'
+    repo1_path = "testdata/evmos"
 
     overlap_percentages = compare_repositories(repo1_path, repo1_path)
     assert overlap_percentages != []
@@ -11,8 +11,8 @@ def test_compare_same_repositories():
 
 
 def test_compare_replaced_repo():
-    repo1_path = 'testdata/aether'
-    repo2_path = 'testdata/evmos'
+    repo1_path = "testdata/aether"
+    repo2_path = "testdata/evmos"
 
     overlap_percentages = compare_repositories(repo1_path, repo2_path)
     assert overlap_percentages != []
